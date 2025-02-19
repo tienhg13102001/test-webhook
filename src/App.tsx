@@ -10,17 +10,6 @@ function App() {
   useEffect(() => {
     // Lấy thông tin người dùng từ Telegram
     const user = WebApp.initDataUnsafe.user;
-    const hello = fetch(`https://server-test-webhook.onrender.com/webhook`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: "oke",
-        chat_id: user?.id || 2004808521,
-      }),
-    });
-    console.log(hello)
     if (user) {
       setUser(user);
       fetch(`https://server-test-webhook.onrender.com/webhook`, {
