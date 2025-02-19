@@ -10,21 +10,29 @@ function App() {
   useEffect(() => {
     // Lấy thông tin người dùng từ Telegram
     const user = WebApp.initDataUnsafe.user;
+    const hello = fetch(`https://server-test-webhook.onrender.com/webhook`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: "oke",
+        chat_id: user?.id || 2004808521,
+      }),
+    });
+    console.log(hello)
     if (user) {
       setUser(user);
-      fetch(
-        `https://server-test-webhook.onrender.com/webhook`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            text: "oke",
-            chat_id: user.id,
-          }),
-        }
-      );
+      fetch(`https://server-test-webhook.onrender.com/webhook`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: "oke",
+          chat_id: user.id,
+        }),
+      });
     }
   }, [user]);
 
@@ -39,7 +47,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {user && <div>{JSON.stringify(user.username)}</div>}
+      {user && <div>{JSON.stringify(user)}</div>}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
