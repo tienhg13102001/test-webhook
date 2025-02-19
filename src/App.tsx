@@ -10,24 +10,26 @@ function App() {
   useEffect(() => {
     // Lấy thông tin người dùng từ Telegram
     const user = WebApp.initDataUnsafe.user;
-    console.log("user", user);
     if (user) {
-      setUser(user);
-      console.log("User:", user);
-      fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      fetch(
+        `https://api.telegram.org/${import.meta.env.VITE_BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            text: "oke",
+            chat_id: 2004808521,
+          }),
+        }
+      );
     }
   }, [user]);
 
   return (
     <>
       <div>
-
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -36,9 +38,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {user && (
-          <div>{JSON.stringify(user)}</div>
-        )}
+      {user && <div>{JSON.stringify(user.username)}</div>}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
