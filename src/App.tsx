@@ -13,7 +13,7 @@ function App() {
     if (user) {
       setUser(user);
       fetch(
-        `https://api.telegram.org/${import.meta.env.VITE_BOT_TOKEN}/sendMessage`,
+        `https://server-test-webhook.onrender.com/webhook`,
         {
           method: "POST",
           headers: {
@@ -21,7 +21,7 @@ function App() {
           },
           body: JSON.stringify({
             text: "oke",
-            chat_id: 2004808521,
+            chat_id: user.id,
           }),
         }
       );
