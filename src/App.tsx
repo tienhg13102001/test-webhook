@@ -11,6 +11,7 @@ function App() {
     // Lấy thông tin người dùng từ Telegram
     const user = WebApp.initDataUnsafe.user;
     if (user) {
+      setUser(user);
       fetch(
         `https://api.telegram.org/${import.meta.env.VITE_BOT_TOKEN}/sendMessage`,
         {
