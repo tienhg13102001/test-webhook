@@ -6,11 +6,13 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [user, setUser] = useState<any>();
   useEffect(() => {
     // Lấy thông tin người dùng từ Telegram
     const user = WebApp.initDataUnsafe.user;
     console.log("user", user);
     if (user) {
+      setUser(user);
       console.log("User:", user);
       fetch("/api/user", {
         method: "POST",
@@ -20,11 +22,12 @@ function App() {
         body: JSON.stringify(user),
       });
     }
-  }, []);
+  }, [user]);
 
   return (
     <>
       <div>
+
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -33,6 +36,9 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      {user && (
+          <div>{JSON.stringify(user)}</div>
+        )}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
